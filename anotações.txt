@@ -1,0 +1,2 @@
+php artisan config:clear
+    Limpa o cache dos arquivos de configuração
