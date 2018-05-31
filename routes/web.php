@@ -11,10 +11,30 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::post('/produto/store', 'ProdutoController@store');
-// Route::get('/produto/{produto}/valor/{valor}', 'ProdutoController@show');
-Route::get('/posts', 'PostController@index');
-Route::post('/posts/store', 'PostController@store');
+Route::namespace('portal')->group(function(){ //por exemplo, pegar os controllers da pasta portal.. e abaixo, da pasta fórum
+    Route::get('/', 'HomeController@index');
+    Route::get('/user/create', 'UserController@create');
+    Route::post('/user/store', 'UserController@store');
+});
 
-// Route::put()
+Route::get('/login', 'LoginController@index');
+Route::post('/login/store', 'LoginController@store');
+// Route::get('/login/destroy', 'LoginController@destroy');
+// Route::post('/login/store', 'LoginController@store');
+Route::get('/user/create', 'UserController@create');
+Route::post('/user/store', 'UserController@store');
+
+
+// Route::namespace('forum')->group(function(){
+//     Route::get('/forum', 'ForumController@index');
+// });
+
+// Route::namespace('admin')->prefix('admin')->group(function(){
+//     //Vai por o prefixo 'admin' antes de cada rota
+//     //admin/post/create
+//     Route::get('/admin', 'AdminController@index');
+//     Route::get('/post/create', 'AdminController@create');
+// });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

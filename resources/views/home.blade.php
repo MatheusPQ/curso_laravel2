@@ -1,12 +1,23 @@
-@extends('layout')
+@extends('layouts.app')
 
-@section('portal')
-    <h2>Página inicial do curso de laravel</h2>
-    {{-- <h1>{{$nome}}</h1> --}}
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
 
-    <ul>
-        {{-- @foreach($users as $user)
-            <li>{{$user->name}}</li>
-        @endforeach --}}
-    </ul>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

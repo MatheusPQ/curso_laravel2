@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ProdutoController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        return view('login');
     }
 
     /**
@@ -34,7 +35,23 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request->all());
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $auth = Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        if(!$auth){
+            session()->flash('error', 'Erro ao logar');
+            return back();
+        }
+
+        return redirect('/');
     }
 
     /**
@@ -43,9 +60,9 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $valor)
+    public function show($id)
     {
-        dd($valor); //Não precisa ser o msm nome, mas recomenda que faça isso
+        //
     }
 
     /**
@@ -77,8 +94,10 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        auth()->logout();
+
+        return back();
     }
 }

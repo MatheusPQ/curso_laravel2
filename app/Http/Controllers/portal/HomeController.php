@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\portal;
 
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Post;
 
-class UserController extends Controller
+use App\Http\Controllers\Controller;
+
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,35 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // $nome = "Fulano";
+        // return view('home')->with('nome', $nome);
+        // return view('home', [
+        //     'nome' => $nome,
+        //     'idade' => $idade
+        // ]);
+
+        // $users = App\User::all();
+
+        //QUERY BUILDER
+        // $users = \DB::table('users')->where('id', '>', 28)->orderBy('name')->get();
+        // return $users;
+        
+        // return view('home', compact('nome'));
+
+        // dd($_ENV['DB_CONNECTION']); //ñ funcionou :(
+        // dd(getenv()); //Funcionou! :D
+
+        // $posts = Post->greaterThan(12);
+        // $posts = Post::greaterThan(12); //Chamando método estático
+        // $posts = (new Post)->greaterThan(12); //Instanciando e chamando
+
+        // return $posts;
+        // $posts = Post::all();
+
+        // $user = new User;
+        // dd($user->find(35)->posts->all());
+
+        return view('home');
     }
 
     /**
@@ -25,7 +55,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user_create');
+        //
     }
 
     /**
@@ -36,22 +66,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = new User;
-        $user = $user->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        auth()->login($user);
-
-        return redirect('/');
+        //
     }
 
     /**

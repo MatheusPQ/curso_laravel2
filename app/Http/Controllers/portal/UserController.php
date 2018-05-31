@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\portal;
 
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Http\Requests\UserRequest;
+
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -34,24 +36,27 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
 
         $user = new User;
-        $user = $user->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // $user->create($request->all());
 
-        auth()->login($user);
+        //Maneiras diferente de usar o request
+        // dd($request->email);
+        // dd($request->input('email'));
+        // dd(request('email'));
 
-        return redirect('/');
+        $user->create($request->all());
+
+        session()->flash('message', 'Cadastrado com sucesso');
+
+        return back();
+        // $user = new User;
+        // $user->name = 'Fulano';
+        // $user->email = 'fulano@email.com';
+        // $user->password = \Hash::make(123);
+        // $user->save();
     }
 
     /**

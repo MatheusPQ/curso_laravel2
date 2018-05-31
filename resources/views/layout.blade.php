@@ -13,6 +13,17 @@
         <section class="header">
 
             @include('includes.header')
+            <div style="float:right;">
+                @if(Auth::check())
+                    Olá {{auth()->user()->name}}
+                    <a href="/login/destroy" class="btn btn-danger">Logout</a>
+                @else
+                    Bem vindo visitante
+                    <a href="/login" class="btn btn-danger">Login</a>
+
+
+                @endif
+            </div>
 
         </section>
 

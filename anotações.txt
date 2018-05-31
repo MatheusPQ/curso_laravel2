@@ -1,2 +1,12 @@
 php artisan config:clear
     Limpa o cache dos arquivos de configuração
+
+php artisan tinker
+    factory(App\User::class, 20)->create()
+    Cria 20 registros fakes e os insere no banco.
+
+php artisan make:factory PostFactory
+php artisan make:factory PostFactory --model=PostFactory
+    Já cria referenciando a model especificada
+
+php artisan make:request UserRequest
