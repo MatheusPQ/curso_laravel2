@@ -11,13 +11,18 @@
 |
 */
 
-Route::namespace('portal')->group(function(){ //por exemplo, pegar os controllers da pasta portal.. e abaixo, da pasta fórum
+// Route::namespace('portal')->group(function(){ //por exemplo, pegar os controllers da pasta portal.. e abaixo, da pasta fórum
     Route::get('/', 'HomeController@index');
     Route::get('/user/create', 'UserController@create');
     Route::post('/user/store', 'UserController@store');
-});
+// });
 
-Route::get('/login', 'LoginController@index');
+//GUEST: só para usuarios que nao estao logados
+// Route::get('/login', 'LoginController@index')->middleware('guest');
+
+//AUTH: só para usuários que estão logados.. senão redireciona de volta
+// Route::get('/login', 'LoginController@index')->middleware('auth');
+Route::get('/login', 'LoginController@index')->middleware('my_auth');
 Route::post('/login/store', 'LoginController@store');
 // Route::get('/login/destroy', 'LoginController@destroy');
 // Route::post('/login/store', 'LoginController@store');

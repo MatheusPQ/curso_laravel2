@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    public function __construct(){
+        //$this->middleware('guest'); //Vai ser executado para todos os métodos deste controller
+        // $this->middleware('guest')->except('index'); //Permite acessar o método index
+    }
+
     /**
      * Display a listing of the resource.
      *
